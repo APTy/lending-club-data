@@ -1,0 +1,34 @@
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+### Node ###
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+
+### NPM ###
+npm-debug.log
+node_modules
+
+
+### Bower ###
+**/bower_components/
+
+## API keys
+env/config.js

@@ -1,6 +1,7 @@
 var request = require("request");
 var fs = require("fs");
 var express = require('express');
+var config = require('./env/config.js');
 var app = express();
 
 // Send all requests to the index page
@@ -14,9 +15,7 @@ request({
   method: "GET",
   timeout: 10000,
   'content-type': 'application/json',
-  headers: {
-    'Authorization': '1DhQpYKsc/JBKZ/OmAHRPaYSgUo='
-  },
+  headers: config,
   data: '{showAll: false}'
 }, function(err, res, body) {
   var data = JSON.parse(body);
