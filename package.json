@@ -1,0 +1,25 @@
+{
+  "name": "lending-club-data",
+  "version": "1.0.0",
+  "description": "Analyze loan data from lendingclub.com",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/APTy/lending-club-data.git"
+  },
+  "keywords": [
+    "lendingclub",
+    "data",
+    "analysis"
+  ],
+  "author": "Tyler Julian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/APTy/lending-club-data/issues"
+  },
+  "homepage": "https://github.com/APTy/lending-club-data"
+}
