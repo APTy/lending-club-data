@@ -1,26 +1,41 @@
 var request = require("request");
 var fs = require("fs");
+var cors = require('cors');
 var express = require('express');
 var config = require('./env/config.js');
 var app = express();
 
-// Send all requests to the index page
-app.get('/*',function(req, res){
+app.use(cors());
+
+app.get('/api/v1',function(req, res){
+  console.log('got');
+  res.send(loans);
+});
+
+app.get('/',function(req, res){
   res.sendFile(__dirname + '/public/index.html');
 });
 
+
 // Load loan data for most recent batch of loans
+var loans = [];
 request({
   uri: "https://api.lendingclub.com/api/investor/v1/loans/listing",
   method: "GET",
   timeout: 10000,
   'content-type': 'application/json',
-  headers: config,
-  data: '{showAll: false}'
+  headers: config
 }, function(err, res, body) {
   var data = JSON.parse(body);
-  console.log(data.loans.length);
+  data.loans.forEach(function(loan) {
+    loans.push({
+      amount: loan.loanAmount,
+      interest: loan.intRate
+    });
+  });
+  console.log('Retrieved most recent loans.');
 }); //.pipe(fs.createWriteStream('test.txt'));
+
 
 
 // Listen for requests
