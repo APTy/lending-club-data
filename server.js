@@ -8,7 +8,6 @@ var app = express();
 app.use(cors());
 
 app.get('/api/v1',function(req, res){
-  console.log('got');
   res.send(loans);
 });
 
