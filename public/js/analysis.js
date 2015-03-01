@@ -45,7 +45,7 @@ var setScales = function(number) {
       temp /= (max[k] - min[k]);
       Math.floor(temp);
 
-      newLoan[prop] = temp;
+      newLoan[k] = temp;
     }
 
     normData.push(newLoan);
@@ -60,14 +60,14 @@ var displayData = function(data) {
     .enter()
     .append('svg:circle')
 
-    .attr('r', function(d, i) { return d[scales['size']];})
-    .attr('cx', function(d) { return d[scales['x-axis']]; })
-    .attr('cy', function(d) { return d[scales['y-axis']]; })
+    .attr('r', function(d, i) { return d['size'];})
+    .attr('cx', function(d) { return d['x-axis']; })
+    .attr('cy', function(d) { return d['y-axis']; })
     .attr('stroke', 'rgba(255,255,255,0.5)')
     .attr('stroke-width', '1px')
 
     .style('fill', function(d) {
-      var scale = Math.floor(d[scales['color']]);
+      var scale = Math.floor(d['color']);
       return ["rgba(", 0,",", 255 - scale,",", scale, ',' , 0.8, ")"].join("");
     })
 
