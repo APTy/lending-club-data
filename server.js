@@ -29,7 +29,9 @@ request({
   data.loans.forEach(function(loan) {
     loans.push({
       amount: loan.loanAmount,
-      interest: loan.intRate
+      interest: loan.intRate,
+      income: loan.annualInc,
+      'credit util': loan.bcUtil
     });
   });
   console.log('Retrieved most recent loans.');
