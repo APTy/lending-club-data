@@ -46,11 +46,3 @@ var server = app.listen(3000, function() {
   console.log('Example app listening at http://%s:%s', host, port);
 
 });
-
-
-/*
-curl -v -X GET \
--H "Content-type: application/json" \
--H "Authorization: 1DhQpYKsc/JBKZ/OmAHRPaYSgUo=" \
--d "{showAll: false}" https://api.lendingclub.com/api/investor/v1/loans/listing
-*/

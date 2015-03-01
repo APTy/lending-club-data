@@ -1,0 +1,8 @@
+svg {
+  display: block;
+}
+
+div {
+  display: inline-block;
+  width: 100px;
+}
