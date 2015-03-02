@@ -4,12 +4,6 @@ var svg = d3.selectAll('svg');
 var loanData;
 var types = ['amount', 'interest', 'income', 'credit util'];
 var scales = {};
-var maxScale = {
-  'x-axis': 750,
-  'y-axis': 550,
-  size: 50,
-  color: 255
-};
 
 var displayData = function(data) {
   svg.selectAll('circle')
@@ -48,6 +42,24 @@ var showTypes = function() {
       select[i].appendChild(option);
     }
   });
+
+  // types.forEach(function(type, index) {
+  //   $('.dropdown-menu').each(function(i, dropdown) {
+  //     var option = document.createElement('option');
+  //     var $option = $('<li/>', {
+  //       role: 'presentation'
+  //       });
+  //     var $a = $('<a/>', {
+  //       role: 'menuitem',
+  //       href: '#',
+  //       text: type
+  //     }).appendTo($option);
+  //     // option.text = option.value = type;
+  //     // i === index && (option.selected = 'selected');
+  //     //<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+  //     $(dropdown).append($option);
+  //   });
+  // });
 };
 
 var getOptions = function() {
