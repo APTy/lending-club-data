@@ -11,7 +11,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
 app.get('/api/v1/types',function(req, res){
-  res.send(Object.keys(loans[0]));
+  res.send(Object.keys(loans[0]).slice(2));
 });
 
 app.get('/api/v1', function(req, res) {
