@@ -4,7 +4,5 @@
 
 ##### Server-Side
 
-1. Send all data types to client
-2. Route and respond to client data requests
-2. Pull new data at intervals
-3. Deploy to web server
+1. Pull new data at intervals
+2. Deploy to web server

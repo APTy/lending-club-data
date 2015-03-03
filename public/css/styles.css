@@ -24,3 +24,7 @@ div {
 .row {
   margin: 10px;
 }
+
+select {
+  width: 100%;
+}

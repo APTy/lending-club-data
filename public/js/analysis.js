@@ -77,11 +77,24 @@ var getOptions = function() {
 };
 
 var getData = function() {
-  api.get(function(data) {
+  getOptions();
+
+  api.post(scales, function(data) {
     loanData = data;
-    getOptions();
     displayData(scale.set(loanData));
   });
+
+  // api.get(function(data) {
+  // });
 };
 
-showTypes();
+$(function() {
+
+  $.ajax({
+    url: 'http://localhost:3000/api/v1/types',
+    success: function(data) {
+      types = data;
+      showTypes();
+    }
+  });
+})

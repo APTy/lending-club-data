@@ -8,10 +8,10 @@ var scale = (function () {
     var max = {};
     var prop;
     var ranges = {
-      'amount': [0, 35000],
-      'interest': [5, 25],
-      'income': [0, 200000],
-      'credit util': [0, 100]
+      'loanAmount': [0, 35000],
+      'intRate': [5, 25],
+      'annualInc': [0, 200000],
+      'dti': [0, 30]
     };
     var maxScale = {
       'x-axis': 750,
@@ -21,20 +21,22 @@ var scale = (function () {
     };
 
     // Find minimum and max values
-    // loans.forEach(function(loan) {
+    loans.forEach(function(loan) {
       for (var k in window.scales) {
         prop = window.scales[k];
 
-        // if(!min[k]) { min[k] = loan[window.scales[k]]; }
-        // if(!max[k]) { max[k] = loan[window.scales[k]]; }
+        if (ranges[prop] === undefined) {
+          if(!min[k]) { min[k] = loan[window.scales[k]]; }
+          if(!max[k]) { max[k] = loan[window.scales[k]]; }
 
-        // min[k] = Math.min(min[k], loan[prop]);
-        // max[k] = Math.max(max[k], loan[prop]);
-
-        min[k] = ranges[prop][0];
-        max[k] = ranges[prop][1];
+          min[k] = Math.min(min[k], loan[prop]);
+          max[k] = Math.max(max[k], loan[prop]);
+        } else {
+          min[k] = ranges[prop][0];
+          max[k] = ranges[prop][1];
+        }
       }
-    // });
+    });
 
     // Populate normalized data array
     loans.forEach(function(loan) {

@@ -14,7 +14,18 @@ var api = (function() {
     };
   };
 
+  var post = function(dataTypes, callback) {
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/api/v1',
+      contentType: 'application/json',
+      data: JSON.stringify(dataTypes),
+      success: callback
+    });
+  };
+
   return {
-    get: get
+    get: get,
+    post: post
   };
 })();

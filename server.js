@@ -1,14 +1,40 @@
 var request = require("request");
 var fs = require("fs");
 var cors = require('cors');
+var bodyParser = require('body-parser');
 var express = require('express');
 var config = require('./env/config.js');
+
 var app = express();
 
+app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
-app.get('/api/v1',function(req, res){
+app.get('/api/v1/types',function(req, res){
+  res.send(Object.keys(loans[0]));
+});
+
+app.get('/api/v1', function(req, res) {
   res.send(loans);
+});
+
+app.post('/api/v1', function(req, res) {
+  var typesRequested = req.body
+  var loansRequested = [];
+  var temp;
+
+  loans.forEach(function(loan) {
+    temp = {};
+
+    for (var k in typesRequested) {
+      var prop = typesRequested[k];
+      temp[prop] = loan[prop];
+    }
+
+    loansRequested.push(temp);
+  });
+
+  res.send(loansRequested);
 });
 
 app.get('/',function(req, res){
@@ -26,17 +52,17 @@ request({
   headers: config
 }, function(err, res, body) {
   var data = JSON.parse(body);
+  loans = data.loans;
   data.loans.forEach(function(loan) {
-    loans.push({
-      amount: loan.loanAmount,
-      interest: loan.intRate,
-      income: loan.annualInc,
-      'credit util': loan.bcUtil
-    });
+    // loans.push({
+    //   amount: loan.loanAmount,
+    //   interest: loan.intRate,
+    //   income: loan.annualInc,
+    //   'credit util': loan.bcUtil
+    // });
   });
   console.log('Retrieved most recent loans.');
 }); //.pipe(fs.createWriteStream('test.txt'));
-
 
 
 // Listen for requests
