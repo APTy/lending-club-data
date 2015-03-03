@@ -17,7 +17,7 @@ var scale = (function () {
       'x-axis': 750,
       'y-axis': 550,
       size: 50,
-      color: 255
+      color: 100
     };
 
     // Find minimum and max values
@@ -54,7 +54,7 @@ var scale = (function () {
       }
       normData.push(newLoan);
     });
-    
+
     return normData;
   };
 

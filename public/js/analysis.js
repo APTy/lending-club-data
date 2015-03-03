@@ -6,6 +6,8 @@ var types = ['amount', 'interest', 'income', 'credit util'];
 var scales = {};
 
 var displayData = function(data) {
+  svg.selectAll('circle').remove();
+
   svg.selectAll('circle')
     .data(data)
     .enter()
@@ -19,7 +21,11 @@ var displayData = function(data) {
 
     .style('fill', function(d) {
       var scale = Math.floor(d['color']);
-      return ["rgba(", 0,",", 255 - scale,",", scale, ',' , 0.8, ")"].join("");
+
+      return ["rgba(", 69 + Math.floor(scale*20/100),
+              ",", 173 - Math.floor(scale*94/100),
+              ",", 168 - Math.floor(scale*89/100),
+              ',' , 0.8, ")"].join("");
     })
 
     .append('svg:title')

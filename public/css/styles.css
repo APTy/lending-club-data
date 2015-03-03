@@ -1,10 +1,12 @@
 body {
   max-width: 800px;
   margin: auto;
+  background-color: #f4fcc2;
 }
 
 svg {
   display: block;
+  background-color: #f4fcc2;
 }
 
 .get-data {
