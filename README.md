@@ -4,5 +4,4 @@
 
 ##### Server-Side
 
-1. Pull new data at intervals
-2. Deploy to web server
+1. Deploy to web server
