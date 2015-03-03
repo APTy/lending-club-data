@@ -37,9 +37,7 @@ app.post('/api/v1', function(req, res) {
   res.send(loansRequested);
 });
 
-app.get('/',function(req, res){
-  res.sendFile(__dirname + '/public/index.html');
-});
+app.use(express.static(__dirname + '/public'));
 
 
 // Load loan data for most recent batch of loans
