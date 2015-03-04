@@ -2,9 +2,11 @@
 
 var api = (function() {
 
-  var get = function(callback) {
+  var URL = 'http://localhost:3000/api/v1';
+
+  var getx = function(callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:3000/api/v1", "false");
+    xhr.open("GET", URL, "false");
     xhr.send();
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -14,10 +16,19 @@ var api = (function() {
     };
   };
 
+  var getInitialData = function(callback) {
+    $.ajax({
+      type: 'GET',
+      url: URL + '/types',
+      contentType: 'application/json',
+      success: callback
+    });
+  };
+
   var post = function(dataTypes, callback) {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:3000/api/v1',
+      url: URL,
       contentType: 'application/json',
       data: JSON.stringify(dataTypes),
       success: callback
@@ -25,7 +36,7 @@ var api = (function() {
   };
 
   return {
-    get: get,
+    getInitialData: getInitialData,
     post: post
   };
 })();

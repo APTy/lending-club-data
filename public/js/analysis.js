@@ -76,6 +76,7 @@ var getOptions = function() {
   }
 };
 
+// Request specific loan data from server
 var getData = function() {
   getOptions();
 
@@ -83,18 +84,13 @@ var getData = function() {
     loanData = data;
     displayData(scale.set(loanData));
   });
-
-  // api.get(function(data) {
-  // });
 };
 
-$(function() {
 
-  $.ajax({
-    url: 'http://localhost:3000/api/v1/types',
-    success: function(data) {
-      types = data;
-      showTypes();
-    }
+// Get initial loan data types
+$(function() {
+  api.getInitialData(function(data) {
+    types = data;
+    showTypes();
   });
 })
