@@ -1,9 +1,12 @@
+// server.js
+
 var request = require("request");
 var fs = require("fs");
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var express = require('express');
 var config = require('./env/config.js');
+var db = require('./app/config.js');
 
 var app = express();
 
