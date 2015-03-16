@@ -6,7 +6,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var express = require('express');
 var config = require('./env/config.js');
-var db = require('./app/config.js');
+var Loans = require('./app/models/loans.js');
 
 var app = express();
 
@@ -55,20 +55,59 @@ var getLoanData = function() {
   }, function(err, res, body) {
     var data = JSON.parse(body);
     loans = data.loans;
-    data.loans.forEach(function(loan) {
-      // loans.push({
-      //   amount: loan.loanAmount,
-      //   interest: loan.intRate,
-      //   income: loan.annualInc,
-      //   'credit util': loan.bcUtil
-      // });
+    loans.forEach(function(loan, i) {
+      var newLoan = new Loans(loan);
+      newLoan.save(function(err) {
+        if (err) return console.log(err);
+        // Loans.findById(newLoan, function (err, doc) {
+        //   if (err) return console.log(err);
+        //   console.log(doc);
+        // })
+      });
     });
     console.log('Retrieved most recent loans.');
   }); //.pipe(fs.createWriteStream('test.txt'));
 };
 
-getLoanData();
-setInterval(getLoanData, 3600000);
+// getLoanData();
+Loans.find(function(err, dbLoans) {
+  console.log('Got loans from db.')
+  loans = dbLoans;
+});
+// setInterval(getLoanData, 3600000);
+
+//try using 'csv-parser'
+// fs.readFile(__dirname + '/data/LoanStats3c_securev1.csv', function(err, data) {
+// //   var buffer = data.toString();
+// // console.log(buffer);
+// //   parser(buffer, function(err, output) {
+// //     console.log(output);
+// //   });
+//
+//   data = data.toString().replace(/\"/g, '');
+//   var buffer = data.split('\n');
+//   var loans = {};
+//   var loanObj = {};
+//
+//   var topline = buffer.shift(); // clear initial first line
+//   var headers = buffer.shift(); // get column headers
+//
+//   headers = headers.split(',');
+//
+//   buffer.forEach(function(loan, i) {
+//     loanObj = {};
+//     loan = loan.split(',');
+//
+//     loan.forEach(function(value, i) {
+//       loanObj[headers[i]] = value;
+//     });
+//
+//     loans[loan[0]] = loanObj;
+//     console.log(i);
+//   });
+//
+//   console.log(loans);
+// });
 
 // Listen for requests
 var server = app.listen(3000, function() {
