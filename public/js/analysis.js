@@ -16,8 +16,8 @@ var displayData = function(data) {
     .attr('r', function(d, i) { return d['size'];})
     .attr('cx', function(d) { return d['x-axis']; })
     .attr('cy', function(d) { return d['y-axis']; })
-    .attr('stroke', 'rgba(255,255,255,0.5)')
-    .attr('stroke-width', '1px')
+    .attr('stroke', 'rgba(200,255,255,1)')
+    .attr('stroke-width', '2px')
 
     .style('fill', function(d) {
       var scale = Math.floor(d['color']);
