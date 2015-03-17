@@ -30,6 +30,7 @@ node_modules
 ### Bower ###
 **/bower_components/
 
-## API keys
+## API Stuff
 **/env/
 env/config.js
+**/data/
