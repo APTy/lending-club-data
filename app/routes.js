@@ -33,11 +33,18 @@ router.post('/api/v1', function(req, res) {
   res.send(loansRequested);
 });
 
-
 //////////////////////////////////////////////////////////////////////
 //////////  Load recent loan data and store in database
 //////////////////////////////////////////////////////////////////////
 var loans = [];
+
+var getLoansFromDB = function() {
+  Loans.find(function(err, dbLoans) {
+    console.log('Got loans from db.')
+    loans = dbLoans;
+  });
+};
+
 var getLoanData = function() {
   request({
     uri: "https://api.lendingclub.com/api/investor/v1/loans/listing",
@@ -47,8 +54,7 @@ var getLoanData = function() {
     headers: config
   }, function(err, res, body) {
     var data = JSON.parse(body);
-    loans = data.loans;
-    loans.forEach(function(loan, i) {
+    data.loans.forEach(function(loan, i) {
       var newLoan = new Loans(loan);
       newLoan.save(function(err) {
         if (err) return console.log(err);
@@ -58,10 +64,6 @@ var getLoanData = function() {
   });
 };
 
-Loans.find(function(err, dbLoans) {
-  console.log('Got loans from db.')
-  loans = dbLoans;
-});
-
+getLoansFromDB();
 
 module.exports = router;
