@@ -31,4 +31,5 @@ node_modules
 **/bower_components/
 
 ## API keys
+**/env/
 env/config.js
