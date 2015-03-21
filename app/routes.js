@@ -64,6 +64,6 @@ var getLoanData = function() {
   });
 };
 
-getLoansFromDB();
+// getLoansFromDB();
 
 module.exports = router;

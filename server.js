@@ -4,6 +4,7 @@ var request = require("request");
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var express = require('express');
+var hist = require('./app/hist')
 var routes = require('./app/routes');
 
 var app = express();

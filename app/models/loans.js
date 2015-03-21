@@ -1,4 +1,4 @@
-// loans.js
+// models/loans.js
 
 var db = require('../config.js');
 var mongoose = require('mongoose');
@@ -130,6 +130,65 @@ var loanSchema = new Schema({
   totCollAmt: Number
 });
 
-var Loans = mongoose.model('Loans', loanSchema);
+var historicalLoanSchema = new Schema({
+  id: Number,
+  member_id: Number,
+  loan_amnt: Number,
+  funded_amnt: Number,
+  funded_amnt_inv: Number,
+  term: Number,
+  int_rate: Number,
+  installment: Number,
+  grade: String,
+  sub_grade: String,
+  emp_title: String,
+  emp_length: String,
+  home_ownership: String,
+  annual_inc: Number,
+  is_inc_v: String,
+  issue_d: Date,
+  loan_status: String,
+  pymnt_plan: String,
+  url: String,
+  desc: String,
+  purpose: String,
+  title: String,
+  zip_code: String,
+  addr_state: String,
+  dti: Number,
+  delinq_2yrs: Number,
+  earliest_cr_line: Date,
+  fico_range_low: Number,
+  fico_range_high: Number,
+  inq_last_6mths: Number,
+  mths_since_last_delinq: Number,
+  mths_since_last_record: Number,
+  open_acc: Number,
+  pub_rec: Number,
+  revol_bal: Number,
+  revol_util: Number,
+  total_acc: Number,
+  initial_list_status: String,
+  out_prncp: Number,
+  out_prncp_inv: Number,
+  total_pymnt: Number,
+  total_pymnt_inv: Number,
+  total_rec_prncp: Number,
+  total_rec_int: Number,
+  total_rec_late_fee: Number,
+  recoveries: Number,
+  collection_recovery_fee: Number,
+  last_pymnt_d: Date,
+  last_pymnt_amnt: Number,
+  next_pymnt_d: Date,
+  last_credit_pull_d: Date,
+  last_fico_range_high: Number,
+  last_fico_range_low: Number,
+  collections_12_mths_ex_med: Number,
+  mths_since_last_major_derog: Number,
+  policy_code: Number,
+});
 
-module.exports = Loans;
+var HistoricalLoan = mongoose.model('HistoricalLoan', historicalLoanSchema);
+
+module.exports = HistoricalLoan;
