@@ -1,6 +1,6 @@
 // analysis.js
 
-var svg = d3.selectAll('svg');
+var svg;
 var loanData;
 var types = ['amount', 'interest', 'income', 'credit util'];
 var scales = {};
@@ -48,24 +48,6 @@ var showTypes = function() {
       select[i].appendChild(option);
     }
   });
-
-  // types.forEach(function(type, index) {
-  //   $('.dropdown-menu').each(function(i, dropdown) {
-  //     var option = document.createElement('option');
-  //     var $option = $('<li/>', {
-  //       role: 'presentation'
-  //       });
-  //     var $a = $('<a/>', {
-  //       role: 'menuitem',
-  //       href: '#',
-  //       text: type
-  //     }).appendTo($option);
-  //     // option.text = option.value = type;
-  //     // i === index && (option.selected = 'selected');
-  //     //<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-  //     $(dropdown).append($option);
-  //   });
-  // });
 };
 
 var getOptions = function() {
@@ -89,6 +71,8 @@ var getData = function() {
 
 // Get initial loan data types
 $(function() {
+  svg = d3.selectAll('svg');
+
   api.getInitialData(function(data) {
     types = data;
     showTypes();

@@ -1,11 +1,14 @@
 // app.js
 
+
+
 var AppView = Backbone.View.extend({
   initialize: function() {
+    this.childView = new VizView({ model: new VizModel() });
     this.render();
   },
   render: function() {
-    this.$el.load('visualizer/view.html').html();
+    this.$el.append( this.childView.el );
   }
 });
 
