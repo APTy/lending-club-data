@@ -18,35 +18,13 @@
       <li><a href="#about" data-toggle="tab">About</a></li>
     </ul>
 
-    <div class="row">
-      <div class="col-xs-3">
-        <h4>x-axis</h4>
-        <select id="x-axis" class="types form-control"></select>
-      </div>
-      <div class="col-xs-3">
-        <h4>y-axis</h4>
-        <select id="y-axis" class="types form-control"></select>
-      </div>
-      <div class="col-xs-3">
-        <h4>size</h4>
-        <select id="size" class="types form-control"></select>
-      </div>
-      <div class="col-xs-3">
-        <h4>color</h4>
-        <select id="color" class="types form-control"></select>
-      </div>
-    </div>
+    <div id="app-view"></div>
 
-    <div class="row">
-      <div class="col-xs-12 get-data">
-        <button class="btn btn-default" onClick='getData()'>Display Data</button>
-      </div>
-    </div>
-    <svg width="800" height="600"></svg>
   </div>
   <script src="../bower_components/d3/d3.min.js"></script>
   <script src="../bower_components/underscore/underscore-min.js"></script>
   <script src="../bower_components/backbone/backbone.js"></script>
+  <script src="app.js"></script>
   <script src="js/api.js"></script>
   <script src="js/scale.js"></script>
   <script src="js/analysis.js"></script>
