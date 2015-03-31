@@ -1,0 +1,21 @@
+{
+  "name": "lending-club-data",
+  "version": "0.0.0",
+  "homepage": "https://github.com/APTy/lending-club-data",
+  "authors": [
+    "Tyler Julian"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "d3": "~3.5.5",
+    "jquery": "~2.1.3"
+  }
+}
