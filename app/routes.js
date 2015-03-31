@@ -1,13 +1,18 @@
 // router.js
 
 var express = require('express');
+var request = require("request");
+
 var config = require('../env/config');
-var Loans = require('./models/loans');
-var hist = require('./hist');
+var ctrl = require('./controllers/main');
+var LoanModel = require('./models/loans');
+var LoanTypes = require('./models/dictionary').types;
+
+var CurrentLoan = LoanModel.Current;
 var router = express.Router();
 
 router.get('/api/v1/types',function(req, res){
-  res.send(Object.keys(loans[0].toObject()).slice(3));
+  res.send(Object.keys(LoanTypes));
 });
 
 router.get('/api/v1', function(req, res) {
@@ -15,7 +20,7 @@ router.get('/api/v1', function(req, res) {
 });
 
 router.post('/api/v1', function(req, res) {
-  var typesRequested = req.body
+  var typesRequested = req.body;
   var loansRequested = [];
   var temp;
 
@@ -24,7 +29,7 @@ router.post('/api/v1', function(req, res) {
 
     for (var k in typesRequested) {
       var prop = typesRequested[k];
-      temp[prop] = loan[prop];
+      temp[prop] = loan[LoanTypes[prop]];
     }
 
     loansRequested.push(temp);
@@ -39,9 +44,14 @@ router.post('/api/v1', function(req, res) {
 var loans = [];
 
 var getLoansFromDB = function() {
-  Loans.find(function(err, dbLoans) {
-    console.log('Got loans from db.')
-    loans = dbLoans;
+  CurrentLoan.find(function(err, dbLoans) {
+    if (dbLoans.length !== 0) {
+      console.log('Retrieved most recent loans from mongo.')
+      loans = dbLoans;
+    } else {
+      console.log('Loans aren\'t available in mongo, checking Lending Club');
+      getLoanData();
+    }
   });
 };
 
@@ -53,17 +63,19 @@ var getLoanData = function() {
     'content-type': 'application/json',
     headers: config
   }, function(err, res, body) {
-    var data = JSON.parse(body);
-    data.loans.forEach(function(loan, i) {
-      var newLoan = new Loans(loan);
+    loans = JSON.parse(body).loans;
+    loans.forEach(function(loan, i) {
+      var newLoan = new CurrentLoan(loan);
       newLoan.save(function(err) {
         if (err) return console.log(err);
       });
     });
-    console.log('Retrieved most recent loans.');
+    console.log('Retrieved most recent loans from Lending Club.');
   });
 };
 
-// getLoansFromDB();
+getLoansFromDB();
+
+// ctrl.findAverage();
 
 module.exports = router;

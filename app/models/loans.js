@@ -4,12 +4,12 @@ var db = require('../config.js');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var loanSchema = new Schema({
+var currentLoanSchema = new Schema({
   id: Number,
   memberId: Number,
   loanAmount: Number,
   fundedAmount: Number,
-  term: String,
+  term: Number,
   intRate: Number,
   expDefaultRate: Number,
   serviceFeeRate: Number,
@@ -189,6 +189,5 @@ var historicalLoanSchema = new Schema({
   policy_code: Number,
 });
 
-var HistoricalLoan = mongoose.model('HistoricalLoan', historicalLoanSchema);
-
-module.exports = HistoricalLoan;
+exports.Historical = mongoose.model('HistoricalLoan', historicalLoanSchema);
+exports.Current = mongoose.model('CurrentLoan', currentLoanSchema);

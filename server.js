@@ -1,6 +1,5 @@
 // server.js
 
-var request = require("request");
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var express = require('express');

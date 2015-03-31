@@ -8,10 +8,10 @@ var scale = (function () {
     var max = {};
     var prop;
     var ranges = {
-      'loanAmount': [0, 35000],
-      'intRate': [5, 25],
-      'annualInc': [0, 200000],
-      'dti': [0, 30]
+      'Loan Amount': [0, 35000],
+      'Interest Rate': [5, 25],
+      'Annual Income': [0, 200000],
+      'Debt-To-Income': [0, 30]
     };
     var maxScale = {
       'x-axis': 750,
@@ -19,7 +19,6 @@ var scale = (function () {
       size: 50,
       color: 100
     };
-
     // Find minimum and max values
     loans.forEach(function(loan) {
       for (var k in window.scales) {
