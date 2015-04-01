@@ -37,18 +37,18 @@ var displayData = function(data) {
     });
 };
 
-var showTypes = function() {
-  types.forEach(function(type, index) {
-    var select = document.getElementsByClassName('types')
-
-    for (var i = 0; i < select.length; i++) {
-      var option = document.createElement('option');
-      option.text = option.value = type;
-      i === index && (option.selected = 'selected');
-      select[i].appendChild(option);
-    }
-  });
-};
+// var showTypes = function() {
+//   types.forEach(function(type, index) {
+//     var select = document.getElementsByClassName('types')
+//
+//     for (var i = 0; i < select.length; i++) {
+//       var option = document.createElement('option');
+//       option.text = option.value = type;
+//       i === index && (option.selected = 'selected');
+//       select[i].appendChild(option);
+//     }
+//   });
+// };
 
 var getOptions = function() {
   var select = document.getElementsByClassName('types');
@@ -60,6 +60,8 @@ var getOptions = function() {
 
 // Request specific loan data from server
 var getData = function() {
+  console.log(this);
+  svg = d3.selectAll('svg');
   getOptions();
 
   api.post(scales, function(data) {
@@ -70,11 +72,9 @@ var getData = function() {
 
 
 // Get initial loan data types
-$(function() {
-  svg = d3.selectAll('svg');
-
-  api.getInitialData(function(data) {
-    types = data;
-    showTypes();
-  });
-})
+// $(function() {
+//   api.getInitialData(function(data) {
+//     types = data;
+//     showTypes();
+//   });
+// })
