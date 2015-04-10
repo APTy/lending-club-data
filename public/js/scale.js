@@ -2,7 +2,7 @@
 
 var scale = (function() {
 
-  var setScales = function(loans) {
+  var setScales = function(loans, scales) {
     var normData = [];
     var min = {};
     var max = {};
@@ -21,12 +21,12 @@ var scale = (function() {
     };
     // Find minimum and max values
     loans.forEach(function(loan) {
-      for (var k in window.scales) {
-        prop = window.scales[k];
+      for (var k in scales) {
+        prop = scales[k];
 
         if (ranges[prop] === undefined) {
-          if(!min[k]) { min[k] = loan[window.scales[k]]; }
-          if(!max[k]) { max[k] = loan[window.scales[k]]; }
+          if(!min[k]) { min[k] = loan[scales[k]]; }
+          if(!max[k]) { max[k] = loan[scales[k]]; }
 
           min[k] = Math.min(min[k], loan[prop]);
           max[k] = Math.max(max[k], loan[prop]);
@@ -42,8 +42,8 @@ var scale = (function() {
       var newLoan = {}
       var temp;
 
-      for (var k in window.scales) {
-        prop = window.scales[k];
+      for (var k in scales) {
+        prop = scales[k];
 
         temp = loan[prop];
         temp -= min[k];
@@ -53,6 +53,7 @@ var scale = (function() {
 
         newLoan[k] = temp;
       }
+
       normData.push(newLoan);
     });
 

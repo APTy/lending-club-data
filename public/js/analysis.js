@@ -1,18 +1,13 @@
 // js/analysis.js
 
-var svg;
-var loanData;
-var types = ['amount', 'interest', 'income', 'credit util'];
-var scales = {};
-
-var displayData = function(data) {
+var displayData = function(svg, scaleData, loanData) {
   svg.selectAll('circle').remove();
 
   svg.selectAll('circle')
 
     // Set the circles on the page with new data and
     // add new circles to the page as necessary
-    .data(data)
+    .data(scaleData)
     .enter()
     .append('svg:circle')
 
@@ -32,39 +27,24 @@ var displayData = function(data) {
               ",", 173 - Math.floor(scale*94/100),
               ",", 168 - Math.floor(scale*89/100),
               ',' , 0.8, ")"].join("");
-    })
+    });
 
     // Add tooltips to the circles
-    .append('svg:title')
-    .text(function(d, i) {
-      return scales['size'] + ': ' + loanData[i][scales['size']] + '\n' +
-      scales['x-axis'] + ': ' + loanData[i][scales['x-axis']] + '\n' +
-      scales['y-axis'] + ': ' + loanData[i][scales['y-axis']] + '\n' +
-      scales['color'] + ': ' + loanData[i][scales['color']];
-    });
-};
-
-var getOptions = function() {
-  var select = this.$('.types');
-
-  for (var i = 0; i < select.length; i++) {
-    scales[select[i].id] = select[i].value;
-  }
+    // .append('svg:title')
+    // .text(function(d, i) {
+    //   return scales['size'] + ': ' + loanData[i][scales['size']] + '\n' +
+    //   scales['x-axis'] + ': ' + loanData[i][scales['x-axis']] + '\n' +
+    //   scales['y-axis'] + ': ' + loanData[i][scales['y-axis']] + '\n' +
+    //   scales['color'] + ': ' + loanData[i][scales['color']];
+    // });
 };
 
 // Request specific loan data from server
-var getData = function() {
-  svg = d3.selectAll(this.$('svg'));
-  getOptions.call(this);
-
+var getData = function(scales) {
   api.post(scales, function(data) {
-    loanData = data;
-    // this.loanData = data;
-    displayData(scale.set(loanData));
+    this.set({
+      loanData: data,
+      scaleData: scale.set(data, scales)
+    });
   }.bind(this));
-};
-
-var showData = function() {
-  svg = d3.selectAll(this.$('svg'));
-  getOptions.call(this);
 };

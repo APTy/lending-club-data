@@ -9,7 +9,13 @@ var VizModel = Backbone.Model.extend({
   },
 
   getData: function() {
-    getData.call(this);
+    var scales = {
+      'x-axis': this.get('x-axis'),
+      'y-axis': this.get('y-axis'),
+      'size': this.get('size'),
+      'color': this.get('color'),
+    };
+    getData.call(this, scales);
   },
 
   // Get initial loan data types

@@ -12,7 +12,7 @@ var VizView = Backbone.View.extend({
   },
 
   getData: function() {
-    this.model.getData.call(this);
+    this.model.getData();
   },
 
   changeSelect: function(e) {
@@ -34,12 +34,17 @@ var VizView = Backbone.View.extend({
     }.bind(this));
   },
 
+  showData: function() {
+    var svg = d3.selectAll(this.$('svg'));
+    displayData(svg, this.model.get('scaleData'), this.model.get('loanData'));
+  },
+
   initialize: function() {
     this.render();
 
-    this.model.on('change', function() {
-      // console.log('ayyy');
-    });
+    this.model.on('change:loanData', function() {
+      this.showData();
+    }.bind(this));
   },
 
   addListeners: function() {
