@@ -14,6 +14,7 @@ var AppView = Backbone.View.extend({
   changeTab: function(e) {
     var hash = e.toElement.hash.replace('#', '');
     this.childView = this.views[hash];
+    this.childView.delegateEvents();
     this.render();
   },
 
@@ -23,7 +24,7 @@ var AppView = Backbone.View.extend({
   },
 
   render: function() {
-    return this.$('#app-view').html( this.childView.render() );
+    return this.$('#app-view').html( this.childView.el );
   }
 
 });
