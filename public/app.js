@@ -3,8 +3,8 @@
 var AppView = Backbone.View.extend({
 
   views: {
-    visualizer: this.vizView,
-    about: this.aboutView
+    visualizer: new VizView({ el: this.el, model: new VizModel() }),
+    about: new AboutView()
   },
 
   events: {
@@ -18,14 +18,12 @@ var AppView = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.views.visualizer = new VizView({ model: new VizModel() });
-    this.views.about = new AboutView();
     this.childView = this.views.visualizer;
     this.render();
   },
 
   render: function() {
-    return this.$('#app-view').html( this.childView.el );
+    return this.$('#app-view').html( this.childView.render() );
   }
 
 });

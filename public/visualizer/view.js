@@ -11,6 +11,7 @@ var VizView = Backbone.View.extend({
   },
 
   getData: function() {
+    console.log('gettin');
     this.model.getData.call(this);
   },
 
@@ -39,6 +40,7 @@ var VizView = Backbone.View.extend({
 
   render: function() {
     this.$el.load(this.template, this.addListeners.bind(this)).html();
+    this.delegateEvents();
     return this.$el;
   }
 
