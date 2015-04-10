@@ -7,7 +7,7 @@
   <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="container-fluid">
+  <div id="app" class="container-fluid">
     <div class="row row-centered">
       <h1>Lending Club Data Visualization</h1>
     </div>
@@ -17,10 +17,9 @@
       <li><a href="#historical" data-toggle="tab">Historical Data</a></li>
       <li><a href="#about" data-toggle="tab">About</a></li>
     </ul>
-
     <div id="app-view"></div>
-
   </div>
+
   <script src="../bower_components/d3/d3.min.js"></script>
   <script src="../bower_components/underscore/underscore-min.js"></script>
   <script src="../bower_components/backbone/backbone.js"></script>
@@ -29,6 +28,7 @@
   <script src="js/analysis.js"></script>
   <script src="visualizer/model.js"></script>
   <script src="visualizer/view.js"></script>
+  <script src="about/view.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
