@@ -1,6 +1,6 @@
 // scaling.js
 
-var scale = (function () {
+var scale = (function() {
 
   var setScales = function(loans) {
     var normData = [];

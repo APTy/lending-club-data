@@ -1,4 +1,4 @@
-// analysis.js
+// js/analysis.js
 
 var svg;
 var loanData;
@@ -9,16 +9,22 @@ var displayData = function(data) {
   svg.selectAll('circle').remove();
 
   svg.selectAll('circle')
+
+    // Set the circles on the page with new data and
+    // add new circles to the page as necessary
     .data(data)
     .enter()
     .append('svg:circle')
 
+    // Set the basic attributes of the circles, including
+    // the circle size, x-position, and y-position
     .attr('r', function(d, i) { return d['size'];})
     .attr('cx', function(d) { return d['x-axis']; })
     .attr('cy', function(d) { return d['y-axis']; })
     .attr('stroke', 'rgba(200,255,255,1)')
     .attr('stroke-width', '2px')
 
+    // Use a custom color scale to set the color of the circles
     .style('fill', function(d) {
       var scale = Math.floor(d['color']);
 
@@ -28,6 +34,7 @@ var displayData = function(data) {
               ',' , 0.8, ")"].join("");
     })
 
+    // Add tooltips to the circles
     .append('svg:title')
     .text(function(d, i) {
       return scales['size'] + ': ' + loanData[i][scales['size']] + '\n' +
@@ -37,21 +44,8 @@ var displayData = function(data) {
     });
 };
 
-// var showTypes = function() {
-//   types.forEach(function(type, index) {
-//     var select = document.getElementsByClassName('types')
-//
-//     for (var i = 0; i < select.length; i++) {
-//       var option = document.createElement('option');
-//       option.text = option.value = type;
-//       i === index && (option.selected = 'selected');
-//       select[i].appendChild(option);
-//     }
-//   });
-// };
-
 var getOptions = function() {
-  var select = document.getElementsByClassName('types');
+  var select = this.$('.types');
 
   for (var i = 0; i < select.length; i++) {
     scales[select[i].id] = select[i].value;
@@ -60,21 +54,11 @@ var getOptions = function() {
 
 // Request specific loan data from server
 var getData = function() {
-  console.log(this);
-  svg = d3.selectAll('svg');
-  getOptions();
+  svg = d3.selectAll(this.$('svg'));
+  getOptions.call(this);
 
   api.post(scales, function(data) {
     loanData = data;
     displayData(scale.set(loanData));
   });
 };
-
-
-// Get initial loan data types
-// $(function() {
-//   api.getInitialData(function(data) {
-//     types = data;
-//     showTypes();
-//   });
-// })

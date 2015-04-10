@@ -1,4 +1,4 @@
-// visualizer/viz.js
+// visualizer/view.js
 
 'use strict';
 
@@ -11,8 +11,7 @@ var VizView = Backbone.View.extend({
   },
 
   getData: function() {
-    console.log(this);
-    this.model.getData();
+    this.model.getData.call(this);
   },
 
   showTypes: function() {
@@ -41,24 +40,6 @@ var VizView = Backbone.View.extend({
   render: function() {
     this.$el.load(this.template, this.addListeners.bind(this)).html();
     return this.$el;
-  }
-
-});
-
-var VizModel = Backbone.Model.extend({
-
-  defaults: {
-    types: []
-  },
-
-  getData: function() {
-    getData.call(this);
-  },
-
-  initialize: function() {
-    api.getInitialData(function(data) {
-      this.set({types: data});
-    }.bind(this));
   }
 
 });
