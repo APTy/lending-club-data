@@ -7,30 +7,39 @@ var VizView = Backbone.View.extend({
   template: 'visualizer/viz.html',
 
   events: {
-    'click #get-data': 'getData'
+    'click #get-data': 'getData',
+    'change .types': 'changeSelect'
   },
 
   getData: function() {
-    console.log('gettin');
     this.model.getData.call(this);
   },
 
-  showTypes: function() {
-    this.model.attributes.types.forEach(function(type, index) {
-      var $selects = this.$('.types');
+  changeSelect: function(e) {
+    this.model.set(e.target.id, e.target.value);
+  },
 
-      $selects.each(function(i, select) {
+  showTypes: function() {
+    var $selects = this.$('.types');
+
+    $selects.each(function(i, select) {
+      this.model.get('types').forEach(function(type, i) {
         var $option = $('<option/>', {
           text: type,
           value: type
         });
         $(select).append($option);
       });
+      this.model.set(select.id, select.value);
     }.bind(this));
   },
 
   initialize: function() {
     this.render();
+
+    this.model.on('change', function() {
+      // console.log('ayyy');
+    });
   },
 
   addListeners: function() {

@@ -5,7 +5,7 @@
 var VizModel = Backbone.Model.extend({
 
   defaults: {
-    types: []
+    types: [],
   },
 
   getData: function() {

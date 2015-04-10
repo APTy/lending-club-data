@@ -59,6 +59,12 @@ var getData = function() {
 
   api.post(scales, function(data) {
     loanData = data;
+    // this.loanData = data;
     displayData(scale.set(loanData));
-  });
+  }.bind(this));
+};
+
+var showData = function() {
+  svg = d3.selectAll(this.$('svg'));
+  getOptions.call(this);
 };
