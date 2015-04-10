@@ -31,7 +31,6 @@ var VizView = Backbone.View.extend({
 
   ////////////////////          MODEL INTERACTION          ////////////////////
   getData: function() {
-    console.log('clicky');
     this.model.getData();
   },
 

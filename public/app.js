@@ -3,8 +3,9 @@
 var AppView = Backbone.View.extend({
 
   views: {
-    visualizer: new VizView({ el: this.el, model: new VizModel() }),
-    about: new AboutView()
+    viz: new VizView({ el: this.el, model: new VizModel() }),
+    about: new AboutView(),
+    hist: new HistView()
   },
 
   events: {
@@ -19,7 +20,7 @@ var AppView = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.childView = this.views.visualizer;
+    this.childView = this.views.viz;
     this.render();
   },
 
