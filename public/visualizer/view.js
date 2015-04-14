@@ -11,7 +11,7 @@ var VizView = Backbone.View.extend({
     'change .types': 'changeSelect'
   },
 
-  ////////////////////          VIEW CREATION          ////////////////////
+  //********************              VIEW              ********************//
   initialize: function() {
     this.render();
 
@@ -22,6 +22,7 @@ var VizView = Backbone.View.extend({
 
   addListeners: function() {
     this.showTypes.call(this);
+    initChart.call(this);
   },
 
   render: function() {
@@ -29,7 +30,7 @@ var VizView = Backbone.View.extend({
     return this.$el;
   },
 
-  ////////////////////          MODEL INTERACTION          ////////////////////
+  //********************           CONTROLLER          ********************//
   getData: function() {
     this.model.getData();
   },
@@ -54,7 +55,7 @@ var VizView = Backbone.View.extend({
   },
 
   showData: function() {
-    var svg = d3.selectAll(this.$('svg'));
+    var svg = d3.selectAll(this.$('.display'));
     displayData(svg, this.model.get('scaleData'), this.model.get('loanData'));
   }
 

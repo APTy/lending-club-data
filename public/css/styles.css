@@ -5,6 +5,8 @@ body {
 
 svg {
   display: block;
+  font: 10px sans-serif;
+  /*shape-rendering: crispEdges;*/
 }
 
 .get-data {
@@ -25,4 +27,14 @@ div {
 
 select {
   width: 100%;
+}
+
+rect {
+  fill: #3a444f;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #26292e;
 }

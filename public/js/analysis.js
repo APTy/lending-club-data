@@ -13,7 +13,7 @@ var displayData = function(svg, scaleData, loanData) {
 
     // Set the basic attributes of the circles, including
     // the circle size, x-position, and y-position
-    .attr('r', function(d, i) { return d['size'];})
+    .attr('r', function(d, i) { return d['size']; })
     .attr('cx', function(d) { return d['x-axis']; })
     .attr('cy', function(d) { return d['y-axis']; })
     .attr('stroke', 'rgba(200,255,255,1)')
@@ -48,3 +48,64 @@ var getData = function(scales) {
     });
   }.bind(this));
 };
+
+var initChart = function() {
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = 800 - margin.left - margin.right,
+      height = 600 - margin.top - margin.bottom;
+
+  var x = d3.scale.linear()
+      .domain([-width / 2, width / 2])
+      .range([0, width]);
+
+  var y = d3.scale.linear()
+      .domain([-height / 2, height / 2])
+      .range([height, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .tickSize(-height);
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .ticks(5)
+      .tickSize(-width);
+
+  var zoom = d3.behavior.zoom()
+      .x(x)
+      .y(y)
+      .scaleExtent([1, 32])
+      .on("zoom", zoomed);
+
+  var svg = d3.selectAll(this.$('svg'))
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .call(zoom);
+
+  svg.append("rect")
+      .attr("width", width)
+      .attr("height", height);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  svg.append("g")
+      .attr("class", "display");
+
+  function zoomed() {
+    svg.select(".x.axis").call(xAxis);
+    svg.select(".y.axis").call(yAxis);
+    svg.select(".display")
+    .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  }
+}
