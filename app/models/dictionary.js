@@ -39,5 +39,5 @@ exports.types = {
   'Number of B Credit Lines': 'numBcTl',
   'Number of Activities B Credit': 'numActvBcTl',
   'Number of B Credit Sats': 'numBcSats',
-  'Total Colleciotn Amount': 'totCollAmt'
+  'Total Collection Amount': 'totCollAmt'
 };
