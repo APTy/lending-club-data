@@ -38,3 +38,9 @@ rect {
   fill: none;
   stroke: #26292e;
 }
+
+.axis {
+  font-family: sans-serif;
+  font-size: 12px;
+  stroke: #ccc;
+}

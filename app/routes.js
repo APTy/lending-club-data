@@ -74,8 +74,8 @@ var getLoanData = function() {
   });
 };
 
-// getLoansFromDB();
+getLoansFromDB();
 
-ctrl.findAverage();
+// ctrl.findAverage();
 
 module.exports = router;

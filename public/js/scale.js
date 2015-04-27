@@ -14,8 +14,8 @@ var scale = (function() {
       'Debt-To-Income': [0, 30]
     };
     var maxScale = {
-      'x-axis': 750,
-      'y-axis': 550,
+      'x-axis': 700,
+      'y-axis': 500,
       size: 50,
       color: 100
     };
