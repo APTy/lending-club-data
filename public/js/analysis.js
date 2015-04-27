@@ -107,8 +107,15 @@ var initChart = function() {
     svg.select(".y.axis").call(yAxis);
     svg.select(".display")
     .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    // console.log(svg.selectAll('.display circle'));
     svg.selectAll('.display circle')
-    .attr('stroke-width', (2/d3.event.scale) + 'px');
+    .attr('stroke-width', (2/d3.event.scale) + 'px')
+    .attr('display', function(d) {
+      var display = d['x-axis'] + d3.event.translate[0] < d['size'] + 5 ||
+                    d['y-axis'] + d3.event.translate[1] < d['size'] + 5 ||
+                    d['x-axis'] + d3.event.translate[0] > width - d['size'] - 10 ||
+                    d['y-axis'] + d3.event.translate[1] > height - d['size'] - 10;
+
+      return display ? 'none' : true;
+    });
   }
 }
