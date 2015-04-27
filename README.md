@@ -1,4 +1,4 @@
-# Lending Club Data Visualization
+# Peer View (Lending Club Data Visualization)
 
 Visualize current and historical investment data for lendingclub.com
 
