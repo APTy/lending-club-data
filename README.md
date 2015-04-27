@@ -1,8 +1,10 @@
-# Peer View (Lending Club Data Visualization)
+# Peer View
 
-Visualize current and historical investment data for lendingclub.com
+### Lending Club Data Visualization
 
-### Vizualization View
+Lending Club is the world's largest marketplace connecting investors and borrowers. Not only do they provide their current investment data to developers, but they also maintain a rich, open history of all assets that have ever been processed through their platform. This project allows users to visualize that data in a meaningful way.
+
+### Visualization View
 
 ![lending club analysis](./project-files/viz.png)
 
