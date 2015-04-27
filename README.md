@@ -1,16 +1,25 @@
 # Lending Club Data Visualization
 
-### Version 2.0 Requirements To Be Finished
+Visualize current and historical investment data for lendingclub.com
 
-##### Server-Side
+### Vizualization View
 
-1. Deploy to web server
-2. Store data to database
-3. Create averages for scales
-4. Send normalized data to client
+![lending club analysis](./project-files/viz.png)
 
-##### Client-Side
 
-1. Add axis and scale legends
-2. Improve user experience
-3. Segregate code into modules
+### Back-end Data
+
+Using a number of CSV files available at lendingclub.com:
+
+- LoanStats3b_securev1.csv
+- LoanStats3c_securev1.csv
+
+As well as the [Lending Club API](https://www.lendingclub.com/developers/listed-loans.action) for currently available investments.
+
+#### Version 2.0 Requirements To Be Finished
+
+###### Server-Side
+
+1. Create standard analysis of historical data
+1. Create average scales for each data point
+1. Send normalized data to client
