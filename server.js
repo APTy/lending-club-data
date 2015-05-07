@@ -3,8 +3,8 @@
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var express = require('express');
-var hist = require('./app/hist')
-var routes = require('./app/routes');
+var hist = require('./server/hist')
+var routes = require('./server/routes');
 
 var app = express();
 

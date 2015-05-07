@@ -39,16 +39,6 @@ var displayData = function(svg, scaleData, loanData) {
     // });
 };
 
-// Request specific loan data from server
-var getData = function(scales) {
-  api.post(scales, function(data) {
-    this.set({
-      loanData: data,
-      scaleData: scale.set(data, scales)
-    });
-  }.bind(this));
-};
-
 var initChart = function() {
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
       width = 800 - margin.left - margin.right,
