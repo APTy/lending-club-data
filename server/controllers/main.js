@@ -2,42 +2,24 @@
 
 var mongoose = require('mongoose');
 var LoanModel = require('../models/loans');
+var util = require('../core/utilities');
 var HistLoan = LoanModel.Historical;
 
 exports.findAverage = function() {
-  var query = HistLoan.find();
-  var time = startTimer();
-  var numLoans;
+  var cursor = HistLoan.find();
+  var checkTime = util.startTimer();
+  var numLoans = 0;
+  var sum = 0;
 
-  query.select('annual_inc');
+  var stream = cursor.limit(1000).stream();
 
-  query.exec(function(err, loans) {
-    if (err) return console.log(err);
-
-    numLoans = loans.length
-    console.log('Total loans: ' + loans.length);
-    checkTime(time);
-    var sum = 0;
-
-    loans.forEach(function(loan) {
-      if (loan.annual_inc) {
-        sum += Math.floor(+loan.annual_inc);
-      }
-    });
-    console.log('Average income: ' + sum/numLoans);
-    checkTime(time);
+  stream.on('data', function(data) {
+    numLoans++;
+    sum += data.annual_inc;
   });
-};
 
-var startTimer = function() {
-  return {
-    start: new Date(),
-    end: new Date()
-  };
-}
-
-var checkTime = function(time) {
-  time.end = new Date();
-  console.log((time.end - time.start) + "ms has elapsed.\n");
-  time.start = time.end;
+  stream.on('close', function() {
+    console.log('Average income:', sum / numLoans);
+    checkTime();
+  });
 };
