@@ -13,7 +13,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(cors());
 
 // Apply routes and serve page
-app.use('/', routes);
+app.use('/api/v1', routes);
 app.use(express.static(__dirname + '/public'));
 
 // Listen for requests

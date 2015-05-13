@@ -11,15 +11,15 @@ var LoanTypes = require('./models/dictionary').types;
 var CurrentLoan = LoanModel.Current;
 var router = express.Router();
 
-router.get('/api/v1/types',function(req, res){
+router.get('/types',function(req, res){
   res.send(Object.keys(LoanTypes));
 });
 
-router.get('/api/v1', function(req, res) {
+router.get('/', function(req, res) {
   res.send(loans);
 });
 
-router.post('/api/v1', function(req, res) {
+router.post('/', function(req, res) {
   var typesRequested = req.body;
   var loansRequested = [];
   var temp;
