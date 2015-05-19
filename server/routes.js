@@ -20,6 +20,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+  var scales = ['x-axis', 'y-axis', 'size', 'color'];
   var typesRequested = req.body;
   var loansRequested = [];
   var temp;
@@ -27,10 +28,10 @@ router.post('/', function(req, res) {
   loans.forEach(function(loan) {
     temp = {};
 
-    for (var k in typesRequested) {
-      var prop = typesRequested[k];
+    scales.forEach(function(scale) {
+      var prop = typesRequested[scale];
       temp[prop] = loan[LoanTypes[prop]];
-    }
+    });
 
     loansRequested.push(temp);
   });
@@ -74,8 +75,8 @@ var getLoanData = function() {
   });
 };
 
-// getLoansFromDB();
+getLoansFromDB();
 
-ctrl.findAverage();
+// ctrl.findAverage();
 
 module.exports = router;

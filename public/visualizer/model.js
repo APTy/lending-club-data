@@ -4,6 +4,8 @@
 
 var VizModel = Backbone.Model.extend({
 
+  url: 'http://localhost:3000/api/v1',
+
   getData: function() {
     var scales = {
       'x-axis': this.get('x-axis'),
@@ -12,19 +14,24 @@ var VizModel = Backbone.Model.extend({
       'color': this.get('color'),
     };
 
-    api.post(scales, function(data) {
-      this.set({
-        loanData: data,
-        scaleData: scale.set(data, scales)
-      });
-    }.bind(this));
+    this.save(null, {
+      success: function(model, data) {
+        this.set({
+          loanData: data,
+          scaleData: scale.set(data, scales)
+        });
+      }.bind(this)
+    });
   },
 
   // Get initial loan data types
   initialize: function() {
-    api.getInitialData(function(data) {
-      this.set({types: data});
-    }.bind(this));
+    this.fetch({
+      url: this.url + '/types',
+      success: function(model, data) {
+        this.set({types: data});
+      }.bind(this)
+    });
   }
 
 });
